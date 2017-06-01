@@ -1,6 +1,8 @@
 #!/usr/bin/env php
 <?php
 
+require_once './config.php';
+
 
 /**
  * @author Alexander During
@@ -12,12 +14,14 @@ class Application {
     private $date;
     private $sourceFile;
 
+    private $config;
     private $logDir;
 
 
 
-    public function __construct()
+    public function __construct($config)
     {
+        $this->config = $config;
         $this->logDir = __DIR__ . '/logs';
     }
 
@@ -109,7 +113,7 @@ class Application {
                 if (!file_exists($this->logDir)) {
                     mkdir($this->logDir);
                 }
-                $target = $this->logDir . '/' . $this->date . '--' . basename($this->sourceFile);
+                $target = $this->logDir . '/' . $this->date . '--' . $this->config['sourceIdentifier'] . '--'  . basename($this->sourceFile);
                 break;
         }
         $targetStream = fopen($target, 'w');
@@ -182,5 +186,5 @@ class Application {
 }
 
 
-$application = new Application();
+$application = new Application($config);
 $application->execute($argv);

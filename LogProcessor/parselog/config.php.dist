@@ -1,0 +1,7 @@
+<?php
+
+$config = [
+    // Specifies a string that identifies the source of the log messages parsed by this parselog script, e.g. the server name.
+    // The string will be added to all files, that are created.
+    'sourceIdentifier' => 'production-server-one'
+];
